@@ -81,7 +81,7 @@ router.put("/:_id", async (req, res) => {
 
   if (message) logFields.message = message;
   if (tech) logFields.tech = tech;
-  if (attention) logFields.attention = attention;
+  if (attention !== null) logFields.attention = attention;
   if (date) logFields.date = date;
 
   try {

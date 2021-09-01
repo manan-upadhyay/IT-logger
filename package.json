@@ -6,8 +6,10 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "dev": "concurrently \"npm start\" \"npm run server\""
-  },
+    "client": "npm start --prefix client",
+    "clientinstall": "npm install --prefix client",
+    "dev": "concurrently \"npm run server\" \" npm start --prefix client\" "
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Manan-the-Assassin/IT-logger.git"

@@ -15,6 +15,10 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
+// app.use(function (req, res, next) {
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+// });
+
 //Define Routes
 app.use("/api/logs", require("./routes/logs"));
 app.use("/api/techs", require("./routes/techs"));

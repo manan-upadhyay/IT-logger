@@ -4,6 +4,8 @@ import {
   DELETE_TECH,
   SET_LOADING,
   TECHS_ERROR,
+  SET_CURRENT_TECH,
+  UPDATE_TECH,
 } from "./types";
 
 //Get Tech from server
@@ -51,6 +53,31 @@ export const addTech = (tech) => async (dispatch) => {
   }
 };
 
+//Update tech
+export const updateTech = (tech) => async (dispatch) => {
+  try {
+    const res = await fetch(`/techs/${tech.id}`, {
+      method: "PUT",
+      body: JSON.stringify(tech),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+
+    dispatch({
+      type: UPDATE_TECH,
+      payload: data,
+    });
+  } catch (err) {
+    console.error(err.message);
+    dispatch({
+      type: TECHS_ERROR,
+      payload: err.response.statusText,
+    });
+  }
+};
+
 //Delete tech
 export const deleteTech = (id) => async (dispatch) => {
   try {
@@ -69,6 +96,14 @@ export const deleteTech = (id) => async (dispatch) => {
       payload: err.response.statusText,
     });
   }
+};
+
+//Set Current Tech
+export const setCurrentTech = (tech) => {
+  return {
+    type: SET_CURRENT_TECH,
+    payload: tech,
+  };
 };
 
 //Set Loading to Ture

@@ -25,7 +25,7 @@ export const getLogs = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: LOGS_ERROR,
-      payload: err.response.statusText,
+      payload: err.response.message,
     });
   }
 };
@@ -82,7 +82,6 @@ export const deleteLog = (id) => async (dispatch) => {
 export const updateLog = (log) => async (dispatch) => {
   try {
     setLoading();
-
     const res = await fetch(`/logs/${log.id}`, {
       method: "PUT",
       body: JSON.stringify(log),
@@ -91,7 +90,6 @@ export const updateLog = (log) => async (dispatch) => {
       },
     });
     const data = await res.json();
-
     dispatch({
       type: UPDATE_LOG,
       payload: data,
@@ -107,15 +105,13 @@ export const updateLog = (log) => async (dispatch) => {
 };
 
 //Search Log
-export const searchLogs = (text) => async (dispatch) => {
+export const searchLogs = (text) => (dispatch) => {
   try {
     setLoading();
-    const res = await fetch(`/logs?q=${text}`);
-    const data = await res.json();
 
     dispatch({
       type: SEARCH_LOGS,
-      payload: data,
+      payload: text,
     });
   } catch (err) {
     dispatch({
